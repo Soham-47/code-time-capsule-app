@@ -3,6 +3,9 @@ import { hash } from 'bcryptjs';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 
+// Make sure route is dynamic
+export const dynamic = 'force-dynamic';
+
 // Define validation schema for registration data
 const registrationSchema = z.object({
   username: z
@@ -72,6 +75,7 @@ export async function POST(request: Request) {
         username,
         email,
         password: hashedPassword,
+        name: username, // Add name field to avoid issues
       },
     });
     
@@ -87,8 +91,10 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error('Registration error:', error);
+    // Provide more detailed error message if available
+    const errorMessage = error instanceof Error ? error.message : 'Internal server error';
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: 'Registration failed', error: errorMessage },
       { status: 500 }
     );
   }

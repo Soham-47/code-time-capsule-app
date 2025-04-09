@@ -62,7 +62,18 @@ export default function RegisterPage() {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        console.error('Registration failed:', data);
+        if (response.status === 409) {
+          // Conflict - username or email already exists
+          throw new Error(data.message || 'Username or email already exists');
+        } else if (response.status === 400) {
+          // Validation errors
+          const errorMessages = data.errors?.map((err: any) => err.message).join(', ');
+          throw new Error(errorMessages || data.message || 'Invalid registration data');
+        } else {
+          // Other errors
+          throw new Error(data.error || data.message || 'Registration failed');
+        }
       }
       
       // Redirect to login on success
