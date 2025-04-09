@@ -36,7 +36,7 @@ body {
   }
   
   .input-field {
-    @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500;
+    @apply w-full p-2 border border-gray-300 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500;
   }
   
   .card {
