@@ -6,7 +6,8 @@ import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./prisma";
 import { compare } from "bcryptjs";
 
-export const authOptions: NextAuthOptions = {
+// Export as default AND named export for flexibility
+const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any, // Type cast to avoid compatibility issues
   providers: [
     CredentialsProvider({
@@ -87,4 +88,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
-}; 
+};
+
+export { authOptions };
+export default authOptions; 
