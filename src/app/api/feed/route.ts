@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { AccessMode, Prisma } from "@prisma/client";
+
+// Set export const dynamic to indicate this is a dynamic route
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,7 +16,7 @@ export async function GET(request: NextRequest) {
     
     // Build the filter conditions
     const where = {
-      accessMode: 'PUBLIC',
+      accessMode: AccessMode.PUBLIC,
       isUnlocked: true,
       isDeleted: false,
       ...(language ? { language } : {}),
@@ -23,12 +27,12 @@ export async function GET(request: NextRequest) {
       ? [
           { 
             comments: { 
-              _count: 'desc' 
+              _count: Prisma.SortOrder.desc
             } 
           },
-          { unlockDate: 'desc' }
+          { unlockDate: Prisma.SortOrder.desc }
         ]
-      : [{ unlockDate: 'desc' }, { createdAt: 'desc' }];
+      : [{ unlockDate: Prisma.SortOrder.desc }, { createdAt: Prisma.SortOrder.desc }];
     
     // Fetch the public capsules
     const capsules = await prisma.capsule.findMany({

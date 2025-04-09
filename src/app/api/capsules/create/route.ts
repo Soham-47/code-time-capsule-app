@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { serverEncrypt } from "@/utils/encryption";
+
+// Set export const dynamic to indicate this is a dynamic route
+export const dynamic = 'force-dynamic';
 
 // Validation schema for capsule creation
 const capsuleSchema = z.object({

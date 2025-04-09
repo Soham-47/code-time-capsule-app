@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/layout/Header';
@@ -22,7 +22,8 @@ type PublicCapsule = {
   };
 };
 
-export default function FeedPage() {
+// Feed content component that uses useSearchParams
+function FeedContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [capsules, setCapsules] = useState<PublicCapsule[]>([]);
@@ -289,5 +290,24 @@ export default function FeedPage() {
       
       <Footer />
     </div>
+  );
+}
+
+// Main page component that wraps the content in Suspense
+export default function FeedPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto text-center py-12">
+            <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    }>
+      <FeedContent />
+    </Suspense>
   );
 } 

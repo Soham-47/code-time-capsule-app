@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
+
+// Set export const dynamic to indicate this is a dynamic route
+export const dynamic = 'force-dynamic';
 
 // Define type for the capsule data returned to the client
 type CapsuleData = {

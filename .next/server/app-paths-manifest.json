@@ -1,0 +1,14 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/register/page": "app/auth/register/page.js",
+  "/capsule/create/page": "app/capsule/create/page.js",
+  "/api/auth/register/route": "app/api/auth/register/route.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/page": "app/page.js",
+  "/feed/page": "app/feed/page.js",
+  "/api/capsules/route": "app/api/capsules/route.js",
+  "/api/capsules/create/route": "app/api/capsules/create/route.js",
+  "/api/feed/route": "app/api/feed/route.js"
+}
