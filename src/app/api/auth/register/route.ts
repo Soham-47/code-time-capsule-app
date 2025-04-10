@@ -18,7 +18,7 @@ const registrationSchema = z.object({
     .email('Invalid email address'),
   password: z
     .string()
-    .min(12, 'Password must be at least 12 characters'),
+    .min(4, 'Password must be at least 4 characters'),
 });
 
 export async function POST(request: Request) {

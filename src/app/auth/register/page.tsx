@@ -33,8 +33,8 @@ export default function RegisterPage() {
       return;
     }
     
-    if (password.length < 12) {
-      setError('Password must be at least 12 characters long');
+    if (password.length < 4) {
+      setError('Password must be at least 4 characters long');
       return;
     }
     
@@ -164,7 +164,7 @@ export default function RegisterPage() {
                   placeholder="Create a secure password"
                 />
                 <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                  Minimum 12 characters
+                  Minimum 4 characters
                 </p>
               </div>
               
